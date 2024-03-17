@@ -59,6 +59,7 @@ export async function POST(req: Request) {
 
     // CREATE
     if (eventType === "user.created") {
+        console.log("creating user");
         const {
             id,
             email_addresses,
@@ -76,6 +77,8 @@ export async function POST(req: Request) {
             lastName: last_name,
             photo: image_url,
         };
+
+        console.log(user);
 
         const newUser = await createUser(user);
 
@@ -110,7 +113,7 @@ export async function POST(req: Request) {
     // DELETE
     if (eventType === "user.deleted") {
         const { id } = evt.data;
-
+        console.log("deleted");
         const deletedUser = await deleteUser(id!);
 
         return NextResponse.json({ message: "OK", user: deletedUser });
